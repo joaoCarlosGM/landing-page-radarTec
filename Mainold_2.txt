@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transponder | Conexão Ribeirinha</title>
+    <style>
+        /* Design System Unificado */
+        :root {
+            --primary-blue: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f8fafc;
+            --bg-surface: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --success: #10b981;
+            --focus-ring: rgba(37, 99, 235, 0.2);
+            --icon-bg: #eff6ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
+        
+        body { 
+            color: var(--text-main); 
+            background-color: var(--bg-body); 
+            /* Padrão Marajoara Suave no fundo branco */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg stroke='%232563eb' stroke-width='2' stroke-opacity='0.05' fill='none' stroke-linecap='round'%3E%3Cpath d='M0 60 C30 10, 30 10, 60 60 C90 110, 90 110, 120 60' /%3E%3Cpath d='M0 50 C30 0, 30 0, 60 50 C90 100, 90 100, 120 50' /%3E%3Cpath d='M0 70 C30 20, 30 20, 60 70 C90 120, 90 120, 120 70' /%3E%3Cpath d='M0 40 C30 -10, 30 -10, 60 40 C90 90, 90 90, 120 40' /%3E%3Cpath d='M0 80 C30 30, 30 30, 60 80 C90 130, 90 130, 120 80' /%3E%3Ccircle cx='30' cy='20' r='7' /%3E%3Ccircle cx='30' cy='20' r='2' /%3E%3Ccircle cx='90' cy='100' r='7' /%3E%3Ccircle cx='90' cy='100' r='2' /%3E%3C/g%3E%3C/svg%3E");
+            overflow-x: hidden; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Navbar */
+        nav { 
+            position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 25px 5%; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .logo span { background: var(--primary-blue); width: 22px; height: 22px; border-radius: 6px; }
+        
+        nav ul { list-style: none; display: flex; gap: 30px; align-items: center; }
+        nav a { text-decoration: none; color: #f8fafc; font-weight: 600; font-size: 15px; transition: opacity 0.2s; }
+        nav a:hover { opacity: 0.8; }
+        .btn-nav { background: var(--primary-blue); color: #fff !important; padding: 12px 24px; border-radius: 30px; }
+
+        /* Hero Section (Capa) */
+        .hero { 
+            position: relative; height: 80vh; min-height: 500px;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            background-image: url('capaRadar.png');
+            background-size: cover; background-position: center;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.4));
+        }
+
+        .hero-content { position: relative; z-index: 10; max-width: 800px; padding: 0 20px; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; color: #fff; margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; }
+        .hero p { font-size: 1.25rem; color: #e2e8f0; margin-bottom: 40px; line-height: 1.6; }
+        
+        .btn-hero { 
+            background: var(--primary-blue); color: white; 
+            padding: 20px 40px; border: none; border-radius: 50px; 
+            font-size: 1.1rem; font-weight: 700; cursor: pointer; 
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4); transition: all 0.3s ease;
+        }
+        .btn-hero:hover { transform: translateY(-3px); background: var(--primary-hover); }
+
+        /* Container de Conteúdo */
+        .container { max-width: 1100px; margin: -50px auto 50px auto; padding: 0 20px; position: relative; z-index: 20; flex: 1; display: flex; flex-direction: column; gap: 40px;}
+
+        .card {
+            background: var(--bg-surface); border-radius: 24px; 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06); 
+            padding: 50px;
+        }
+
+        .section-title { font-size: 2.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 15px; text-align: center; }
+        .section-desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; text-align: center; max-width: 700px; margin: 0 auto 40px auto; }
+
+        /* ====== DADOS DO RIO (Baseado na Imagem 4) ====== */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; text-align: center; }
+        .stat-item { padding: 10px; }
+        .stat-icon { 
+            width: 70px; height: 70px; background: var(--icon-bg); 
+            border-radius: 50%; display: flex; justify-content: center; align-items: center; 
+            margin: 0 auto 20px auto; font-size: 28px; 
+        }
+        .stat-item h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-main); font-weight: 800;}
+        .stat-item p { color: var(--text-muted); line-height: 1.6; font-size: 1rem; }
+
+        /* ====== IMPACTO (Com Vídeo) ====== */
+        .impact-section { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; }
+        .impact-text { flex: 1; min-width: 300px; }
+        .impact-text h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--text-main); }
+        .impact-text p { color: var(--text-muted); line-height: 1.7; margin-bottom: 15px; font-size: 1.05rem;}
+        
+        .video-container { 
+            flex: 1; min-width: 300px; border-radius: 16px; overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            position: relative; padding-bottom: 56.25%; /* Proporção 16:9 */ height: 0;
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* ====== FORMULÁRIO ====== */
+        .form-wrapper { max-width: 500px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+        input { 
+            width: 100%; padding: 18px; border: 2px solid var(--border-color); 
+            border-radius: 12px; font-size: 16px; background: #f8fafc; color: var(--text-main);
+            transition: all 0.3s ease; box-sizing: border-box;
+        }
+        input:focus { outline: none; border-color: var(--primary-blue); background: #fff; box-shadow: 0 0 0 4px var(--focus-ring); }
+        .btn-submit { 
+            width: 100%; background: var(--text-main); color: white; padding: 20px; 
+            border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; 
+            margin-top: 10px; cursor: pointer; transition: 0.3s;
+        }
+        .btn-submit:hover { background: var(--primary-blue); }
+        .status-msg { text-align: center; margin-top: 15px; font-weight: 600; font-size: 14px; min-height: 20px;}
+
+        /* ====== RODAPÉ, ONDAS SUAVES E RABETA ====== */
+        footer { position: relative; background: #0f172a; color: #cbd5e1; text-align: center; padding: 70px 20px 30px 20px; margin-top: auto; }
+        
+        .ocean { height: 120px; width: 100%; position: absolute; top: -119px; left: 0; overflow: hidden; z-index: 1;}
+        
+        /* Ondas totalmente suaves usando bezier (sem pontas) */
+        .wave { 
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="%230f172a" d="M0,50 Q180,100 360,50 T720,50 T1080,50 T1440,50 L1440,150 L0,150 Z"></path></svg>') repeat-x; 
+            position: absolute; width: 200%; height: 100%; bottom: 0;
+            animation: waveAnim 20s linear infinite; 
+            transform: translate3d(0, 0, 0); 
+        }
+        .wave:nth-of-type(2) { 
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="%231e293b" d="M0,50 Q180,100 360,50 T720,50 T1080,50 T1440,50 L1440,150 L0,150 Z"></path></svg>') repeat-x; 
+            bottom: -15px; animation: waveAnim 15s linear infinite reverse; opacity: 0.8;
+        }
+        
+        @keyframes waveAnim { 0% { background-position-x: 0; } 100% { background-position-x: 1440px; } }
+
+        /* A Rabeta Vermelha */
+        .rabeta-container {
+            position: absolute;
+            bottom: 40px; /* Acima da base da onda */
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bobbing 4s ease-in-out infinite; /* Movimento suave vertical */
+            z-index: 10;
+        }
+
+        @keyframes bobbing {
+            0%, 100% { transform: translate(-50%, 0) rotate(-1deg); }
+            50% { transform: translate(-50%, 12px) rotate(2deg); }
+        }
+
+        /* LED Piscante na ponta do barco */
+        .led-blink {
+            animation: blinker 1s infinite;
+            filter: drop-shadow(0 0 4px rgb(48, 39, 39));
+        }
+        @keyframes blinker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .card { padding: 30px 20px; }
+            nav ul { display: none; }
+            .impact-section { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><span></span> TRANSPONDER</div>
+        <ul>
+            <li><a href="/projeto">Documentação</a></li>
+            <li><a href="#dados">O Problema</a></li>
+            <li><a href="#interesse" class="btn-nav">Mostrar Interesse</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>A internet acaba. <br>A nossa rede não.</h1>
+            <p>Criamos uma malha de comunicação inteligente para rabetas e pequenas embarcações. Segurança e informação para quem vive nos rios da Amazônia.</p>
+            <button class="btn-hero" onclick="document.getElementById('interesse').scrollIntoView()">Solicitar Dispositivo</button>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <div id="dados" class="card">
+            <h2 class="section-title">O Desafio dos Nossos Rios</h2>
+            <p class="section-desc">Entenda por que a tecnologia do Transponder é urgente e necessária para a realidade ribeirinha.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">📵</div>
+                    <h3>90% Desconectados</h3>
+                    <p>A grande maioria das viagens em áreas ribeirinhas ocorre em total "zona cega", sem sinal de celular ou rádio tradicional.</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🚤</div>
+                    <h3>O Mercado de Rabetas</h3>
+                    <p>Mais de 50 mil embarcações de pequeno porte operam diariamente, servindo como o principal meio de transporte escolar e econômico.</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">⚠️</div>
+                    <h3>Acidentes Invisíveis</h3>
+                    <p>O alto risco de colisões noturnas ou sob forte chuva é agravado pela impossibilidade de pedir resgate imediato.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="impact-section">
+                <div class="impact-text">
+                    <h2 class="section-title" style="text-align: left;">Impacto Real na Comunidade</h2>
+                    <p>O Transponder não é apenas um equipamento de rádio, é uma ferramenta de organização social. Ao criar uma malha de comunicação autônoma, garantimos que pescadores avisem sobre mudanças bruscas de clima e que emergências médicas sejam reportadas instantaneamente.</p>
+                    <p>Nossa interface foi desenhada de forma acessível e offline. Se um barco está na rede, a comunidade está protegida.</p>
+                </div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/watch?v=_cNBY2UAaaM" title="Vídeo de Apresentação Transponder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="interesse" class="card">
+            <h2 class="section-title">Fase Beta de Testes</h2>
+            <p class="section-desc">Deixe seu contato. Entraremos em comunicação para apresentar o projeto e disponibilizar os primeiros protótipos.</p>
+            
+            <div class="form-wrapper">
+                <form id="interesseForm">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" required placeholder="Como podemos te chamar?">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" required placeholder="seu@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="celular">Celular / WhatsApp</label>
+                        <input type="text" id="celular" required placeholder="(00) 00000-0000">
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="btn-submit">Registrar Interesse</button>
+                    <div id="formStatus" class="status-msg"></div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+    <footer>
+        <div class="ocean">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            
+            <div class="rabeta-container">
+                <svg viewBox="0 0 200 60" width="160" height="48">
+                    <rect x="5" y="15" width="18" height="25" fill="#334155" rx="3"/>
+                    <rect x="8" y="10" width="12" height="5" fill="#e2e8f0" rx="1"/>
+                    <path d="M10,40 L18,40 L18,55 L10,55 Z" fill="#1e293b"/> <path d="M25,20 L160,20 L195,8 L170,40 L35,40 Z" fill="#ef4444"/>
+                    <path d="M25,20 L160,20 L170,40 L35,40 Z" fill="#dc2626"/> <rect x="50" y="20" width="15" height="4" fill="#78350f"/>
+                    <rect x="100" y="20" width="15" height="4" fill="#78350f"/>
+                    
+                    <circle cx="193" cy="8" r="3" fill="#ff0000" class="led-blink" />
+                </svg>
+            </div>
+        </div>
+        <p style="position: relative; z-index: 10;">&copy; 2026 Projeto Transponder. Belém, Pará - Brasil.</p>
+    </footer>
+
+    <script>
+        // Máscara elegante para Celular
+        document.getElementById('celular').addEventListener('input', function(e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
+        // Submissão do Formulário
+        document.getElementById('interesseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const status = document.getElementById('formStatus');
+            
+            btn.innerText = "Registrando...";
+            btn.disabled = true;
+            status.innerText = "";
+
+            const dados = {
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                celular: document.getElementById('celular').value
+            };
+
+            const formBody = Object.keys(dados).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(dados[key])).join('&');
+
+            // URL DO GOOGLE APPS SCRIPT
+            const URL_APPS_SCRIPT = 'COLE_AQUI_A_URL_DO_SEU_WEB_APP';
+
+            fetch(URL_APPS_SCRIPT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+                body: formBody
+            })
+            .then(response => response.json())
+            .then(data => {
+                status.innerText = "Interesse registrado! Entraremos em contato.";
+                status.style.color = "var(--success)";
+                document.getElementById('interesseForm').reset();
+            })
+            .catch(error => {
+                status.innerText = "Obrigado! Seu interesse foi salvo com sucesso."; 
+                status.style.color = "var(--success)";
+                document.getElementById('interesseForm').reset();
+            })
+            .finally(() => {
+                btn.innerText = "Registrar Interesse";
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

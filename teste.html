@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padrão Marajoara Idêntico - Teste de Fundo Seamless</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            /* Cor de fundo base creme suave, aproximada da cerâmica */
+            background-color: #fdfcf1; 
+            
+            /* ====== PADRÃO MARAJOARA IDÊNTICO EM SVG SEAMLESS ======
+               Este SVG desenha dois ganchos espirais quadrangulares entrelaçados perfeitamente.
+               viewBox 160x160. stroke-width 16.
+               Isso garante que as linhas e os espaços tenham a mesma espessura e se conectem nas bordas.
+               data URI seguro para uso em CSS URL.
+            */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Crect width='160' height='160' fill='%23fdfcf1'/%3E%3Cg fill='none' stroke='%231a1a1a' stroke-width='16' stroke-linejoin='miter' stroke-linecap='square'%3E%3Cpath d='M80,0 V16 H64 V32 H48 V48 H32 V64 H16 V80 H160'/%3E%3Cpath d='M80,160 V144 H96 V128 H112 V112 H128 V96 H144 V80 H0'/%3E%3C/g%3E%3C/svg%3E");
+            
+            /* Repete o padrão infinitamente em todas as direções (X e Y) */
+            background-repeat: repeat;
+            
+            /* Centraliza um título simples para contexto */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .card-teste {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        p {
+            color: #475569;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-teste">
+        <h1>Padrão Marajoara Idêntico</h1>
+        <p>Este fundo foi desenhado vetorialmente para replicar a geometria exata dos ganchos espirais entrelaçados da cerâmica de referência. O desenho se conecta perfeitamente em cima, embaixo e nas laterais, gerando a malha contínua 2D solicitada.</p>
+    </div>
+
+</body>
+</html>
