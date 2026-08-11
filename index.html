@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transponder | Conexão Ribeirinha</title>
+    <title>Radar e Tecnologia</title>
     <style>
         /* Design System Unificado */
         :root {
@@ -45,11 +45,10 @@
         nav a:hover { opacity: 0.8; }
         .btn-nav { background: var(--primary-blue); color: #fff !important; padding: 12px 24px; border-radius: 30px; display: inline-block;}
         
-        /* Menu Mobile Hamburger */
         .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 102; }
         .menu-toggle span { width: 30px; height: 3px; background: white; border-radius: 2px; transition: 0.3s; }
 
-        /* ====== HERO SECTION (CAPA) ====== */
+        /* ====== HERO SECTION ====== */
         .hero { 
             position: relative; height: 85vh; min-height: 550px;
             display: flex; align-items: center; justify-content: center; text-align: center;
@@ -82,189 +81,101 @@
         .custom-shape-divider-bottom .shape-fill { fill: var(--bg-body); }
 
         /* ====== CARROSSEL ====== */
-        .carousel-wrapper {
-            width: 100%; background: transparent; padding: 30px 0;
-            overflow: hidden; position: relative; z-index: 20;
-        }
-        .carousel-track {
-            display: flex; gap: 20px; width: max-content;
-            animation: scrollCarousel 40s linear infinite;
-        }
+        .carousel-wrapper { width: 100%; background: transparent; padding: 30px 0; overflow: hidden; position: relative; z-index: 20; }
+        .carousel-track { display: flex; gap: 20px; width: max-content; animation: scrollCarousel 40s linear infinite; }
         .carousel-track:hover { animation-play-state: paused; }
-        
-        .comment-card {
-            background: var(--bg-surface); border-left: 4px solid var(--danger);
-            padding: 25px; border-radius: 12px; width: clamp(280px, 80vw, 380px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); white-space: normal;
-        }
+        .comment-card { background: var(--bg-surface); border-left: 4px solid var(--danger); padding: 25px; border-radius: 12px; width: clamp(280px, 80vw, 380px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); white-space: normal; }
         .comment-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; font-style: italic;}
         .comment-card .author { margin-top: 15px; font-weight: 700; font-size: 0.9rem; color: var(--text-main); }
         .comment-card .source { font-size: 0.8rem; color: var(--primary-blue); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
-
-        @keyframes scrollCarousel {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        @keyframes scrollCarousel { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* ====== CONTAINER & GRIDS ====== */
-        .container { 
-            max-width: 1150px; margin: 0 auto 60px auto; padding: 0 20px; 
-            position: relative; z-index: 20; flex: 1; display: flex; flex-direction: column; gap: 80px;
-        }
-
+        .container { max-width: 1150px; margin: 0 auto 60px auto; padding: 0 20px; position: relative; z-index: 20; flex: 1; display: flex; flex-direction: column; gap: 80px; }
         .section-header { text-align: center; max-width: 800px; margin: 0 auto; }
         .section-title { font-size: clamp(1.8rem, 4vw, 2.2rem); font-weight: 800; color: var(--text-main); margin-bottom: 15px; }
         .section-desc { font-size: clamp(1rem, 2vw, 1.1rem); color: var(--text-muted); line-height: 1.7; }
 
-        .stats-grid, .features-grid, .video-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 30px; margin-top: 40px;
-        }
+        .stats-grid, .features-grid, .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
         
-        .stat-item { 
-            background: var(--bg-surface); padding: 40px 30px; text-align: center;
-            border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s ease; border-top: 1px solid rgba(0,0,0,0.02);
-        }
+        .stat-item { background: var(--bg-surface); padding: 40px 30px; text-align: center; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04); transition: transform 0.3s ease; border-top: 1px solid rgba(0,0,0,0.02); }
         .stat-item:hover { transform: translateY(-5px); }
-        .stat-icon { 
-            width: 70px; height: 70px; background: var(--icon-bg); 
-            border-radius: 50%; display: flex; justify-content: center; align-items: center; 
-            margin: 0 auto 20px auto; font-size: 28px; 
-        }
+        .stat-icon { width: 70px; height: 70px; background: var(--icon-bg); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px auto; font-size: 28px; }
         .stat-item h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-main); font-weight: 800;}
         .stat-item p { color: var(--text-muted); line-height: 1.6; font-size: 1rem; }
 
-        .feature-card {
-            background: var(--bg-surface); border-radius: 16px; padding: 40px 30px;
-            text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-            border: 1px solid rgba(37, 99, 235, 0.05);
-        }
-        .feature-card .f-icon {
-            width: 60px; height: 60px; background: var(--primary-blue); color: white;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 20px auto; font-size: 24px; font-weight: bold;
-        }
+        .feature-card { background: var(--bg-surface); border-radius: 16px; padding: 40px 30px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.03); border: 1px solid rgba(37, 99, 235, 0.05); }
+        .feature-card .f-icon { width: 60px; height: 60px; background: var(--primary-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; font-size: 24px; font-weight: bold; }
         .feature-card h3 { font-size: 1.2rem; margin-bottom: 15px; color: var(--text-main); }
         .feature-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
 
         /* ====== VIDEOS ====== */
-        .video-card {
-            position: relative; border-radius: 16px; overflow: hidden;
-            aspect-ratio: 16 / 9; background-size: cover; background-position: center;
-            text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease; display: block;
-        }
+        .video-card { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16 / 9; background-size: cover; background-position: center; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; display: block; }
         .video-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(37,99,235,0.2); }
-        .video-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.3); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; transition: background 0.3s ease;
-        }
+        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.3s ease; }
         .video-card:hover .video-overlay { background: rgba(15, 23, 42, 0.1); }
-        
-        .play-button {
-            background: var(--primary-blue); color: white;
-            width: 55px; height: 55px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(37,99,235,0.4);
-        }
+        .play-button { background: var(--primary-blue); color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(37,99,235,0.4); }
         .play-button svg { width: 24px; height: 24px; fill: currentColor; margin-left: 4px;}
         .video-title { color: #fff; font-weight: 700; font-size: 1.1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5); text-align: center; padding: 0 10px;}
 
-        /* ====== FORMULÁRIO ====== */
-        .card-form {
-            background: var(--bg-surface); border-radius: 24px; 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); 
-            padding: clamp(30px, 5vw, 50px); max-width: 600px; margin: 0 auto; width: 100%;
-            border-top: 5px solid var(--primary-blue);
-        }
-        .form-group { margin-bottom: 20px; }
+        /* ====== FORMULÁRIOS COMUNS (INPUTS) ====== */
+        .card-form { background: var(--bg-surface); border-radius: 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); padding: clamp(30px, 5vw, 50px); max-width: 600px; margin: 0 auto; width: 100%; border-top: 5px solid var(--primary-blue); }
+        .form-group { margin-bottom: 20px; text-align: left; }
         label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
-        input { 
-            width: 100%; padding: 16px; border: 2px solid var(--border-color); 
-            border-radius: 12px; font-size: 16px; background: #f8fafc; color: var(--text-main);
-            transition: all 0.3s ease; box-sizing: border-box;
-        }
-        input:focus { outline: none; border-color: var(--primary-blue); background: #fff; box-shadow: 0 0 0 4px var(--focus-ring); }
-        .btn-submit { 
-            width: 100%; background: var(--text-main); color: white; padding: 18px; 
-            border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; 
-            margin-top: 10px; cursor: pointer; transition: 0.3s;
-        }
+        input, select, textarea { width: 100%; padding: 16px; border: 2px solid var(--border-color); border-radius: 12px; font-size: 16px; background: #f8fafc; color: var(--text-main); transition: all 0.3s ease; box-sizing: border-box; font-family: inherit; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary-blue); background: #fff; box-shadow: 0 0 0 4px var(--focus-ring); }
+        .btn-submit { width: 100%; background: var(--text-main); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; margin-top: 10px; cursor: pointer; transition: 0.3s; }
         .btn-submit:hover { background: var(--primary-blue); }
         .status-msg { text-align: center; margin-top: 15px; font-weight: 600; font-size: 14px; min-height: 20px;}
 
+        /* ====== MODAL SAC (SUPORTE) ====== */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px);
+            z-index: 1000; display: none; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .modal-card {
+            background: var(--bg-surface); border-radius: 24px; padding: 40px 30px;
+            max-width: 500px; width: 100%; position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .close-btn {
+            position: absolute; top: 20px; right: 20px; background: none; border: none;
+            font-size: 28px; color: var(--text-muted); cursor: pointer; transition: 0.3s;
+        }
+        .close-btn:hover { color: var(--text-main); }
+        .link-sac { color: #cbd5e1; text-decoration: underline; font-size: 0.95rem; cursor: pointer; transition: 0.2s; display: inline-block; margin-top: 15px;}
+        .link-sac:hover { color: #fff; }
+
         /* ====== RODAPÉ & ONDAS ====== */
-        footer { 
-            position: relative; background: #0f172a; color: #cbd5e1; 
-            text-align: center; padding: 40px 20px 30px 20px; 
-            margin-top: auto; z-index: 10;
-        }
-        
-        .ocean { 
-            height: 100px; width: 100%; 
-            position: absolute; top: -99px; /* Esse 1px resolve o "bug" da linha vazada */
-            left: 0; overflow: hidden; z-index: 1; /* Positivo, traz a água/barco para cima do fundo do site */
-        }
-        
-        .wave { 
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="%230f172a" d="M0,50 Q180,100 360,50 T720,50 T1080,50 T1440,50 L1440,150 L0,150 Z"></path></svg>') repeat-x; 
-            position: absolute; width: 200%; height: 100%; 
-            bottom: -45px; /* BAIXADA EM -40px CONFORME PEDIDO */
-            animation: waveAnim 20s linear infinite; transform: translate3d(0, 0, 0); 
-        }
-        .wave:nth-of-type(2) { 
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="%231e293b" d="M0,50 Q180,100 360,50 T720,50 T1080,50 T1440,50 L1440,150 L0,150 Z"></path></svg>') repeat-x; 
-            bottom: -35px; /* BAIXADA EM -30px CONFORME PEDIDO */
-            animation: waveAnim 15s linear infinite reverse; opacity: 0.8;
-        }
+        footer { position: relative; background: #0f172a; color: #cbd5e1; text-align: center; padding: 40px 20px 30px 20px; margin-top: auto; z-index: 10; }
+        .ocean { height: 100px; width: 100%; position: absolute; top: -99px; left: 0; overflow: hidden; z-index: 1; }
+        .wave { background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="%230f172a" d="M0,50 Q180,100 360,50 T720,50 T1080,50 T1440,50 L1440,150 L0,150 Z"></path></svg>') repeat-x; position: absolute; width: 200%; height: 100%; bottom: -40px; animation: waveAnim 20s linear infinite; transform: translate3d(0, 0, 0); }
+        .wave:nth-of-type(2) { background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="%231e293b" d="M0,50 Q180,100 360,50 T720,50 T1080,50 T1440,50 L1440,150 L0,150 Z"></path></svg>') repeat-x; bottom: -30px; animation: waveAnim 15s linear infinite reverse; opacity: 0.8; }
         @keyframes waveAnim { 0% { background-position-x: 0; } 100% { background-position-x: 1440px; } }
 
-        /* ====== RABETA CORRIGIDA (Isolada do texto) ====== */
-        /* Colocamos um wrapper externo para gerenciar posição e zoom de tela */
-        .rabeta-wrapper {
-            position: absolute; 
-            bottom: 0; /* BAIXADA EM -30px (De 30px para 0) CONFORME PEDIDO */
-            right: 10%; 
-            z-index: 50;
-        }
-        
-        /* A div interna cuida APENAS do sobe e desce, sem conflitar com escalas */
-        .rabeta-bobbing {
-            animation: bobbing 4s ease-in-out infinite; 
-        }
-
-        @keyframes bobbing {
-            0%, 100% { transform: translateY(0) rotate(-1deg); }
-            50% { transform: translateY(10px) rotate(2deg); }
-        }
-
+        /* ====== RABETA ====== */
+        .rabeta-wrapper { position: absolute; bottom: 0; right: 10%; z-index: 50; }
+        .rabeta-bobbing { animation: bobbing 4s ease-in-out infinite; }
+        @keyframes bobbing { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(10px) rotate(2deg); } }
         .led-blink { animation: blinker 1s infinite; filter: drop-shadow(0 0 5px #ef4444); }
         @keyframes blinker { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
-        /* ====== MEDIA QUERIES ====== */
+        /* ====== RESPONSIVIDADE ====== */
         @media (max-width: 768px) {
             .menu-toggle { display: flex; } 
-            
-            nav ul {
-                position: fixed; top: 0; right: -100%; width: 250px; height: 100vh;
-                background: var(--bg-surface); flex-direction: column; justify-content: center;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.15); transition: right 0.3s ease;
-            }
+            nav ul { position: fixed; top: 0; right: -100%; width: 250px; height: 100vh; background: var(--bg-surface); flex-direction: column; justify-content: center; box-shadow: -5px 0 20px rgba(0,0,0,0.15); transition: right 0.3s ease; }
             nav ul.active { right: 0; }
-            
             nav a { color: var(--text-main); font-size: 1.2rem; }
             .btn-nav { color: #fff !important; width: 80%; text-align: center; }
-
             .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); background: var(--text-main); }
             .menu-toggle.open span:nth-child(2) { opacity: 0; }
             .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); background: var(--text-main); }
-
             .hero { padding-top: 60px; }
             .container { gap: 50px; }
-            
-            /* No mobile, usamos o scale apenas no wrapper, sem conflitar com a animação */
             .rabeta-wrapper { right: 5%; transform: scale(0.8); }
         }
     </style>
@@ -272,13 +183,11 @@
 <body>
 
     <nav>
-        <div class="logo"><span></span> Radar e Tecnologia</div>
-        <div class="menu-toggle" id="mobile-menu">
-            <span></span><span></span><span></span>
-        </div>
+        <div class="logo"><span></span> TRANSPONDER</div>
+        <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
         <ul id="nav-links">
             <li><a href="#dados">O Problema</a></li>
-            <li><a href="#impacto" class="btn-nav">Nossa história</a></li>
+            <li><a href="#impacto" class="btn-nav">Minha história</a></li>
         </ul>
     </nav>
 
@@ -297,26 +206,12 @@
 
     <div class="carousel-wrapper">
         <div class="carousel-track">
-            <div class="comment-card">
-                <div class="source">Portal G1 - Amazonas</div>
-                <p>"Um barco de pequeno porte naufragou após o condutor perder o controle em meio ao temporal e ao rio agitado na orla da cidade. Ele estava sozinho e sem comunicação."</p>
-                <div class="author">Março de 2026</div>
-            </div>
-            <div class="comment-card">
-                <div class="source">Tribunal Marítimo</div>
-                <p>"Colisões noturnas entre pequenas embarcações sem iluminação ou rastreio representam a causa principal de acidentes graves na navegação fluvial interior."</p>
-                <div class="author">Boletim de Acidentes</div>
-            </div>
-            <div class="comment-card">
-                <div class="source">Relato de Morador</div>
-                <p>"Ficamos à deriva por 5 horas com crianças no barco após o motor falhar perto da ilha. Não havia sinal de celular em lugar nenhum para pedir resgate para a cidade."</p>
-                <div class="author">Comunidade Ribeirinha (Pará)</div>
-            </div>
-            <div class="comment-card">
-                <div class="source">Corpo de Bombeiros</div>
-                <p>"Ao longo do ano, incidentes causados por colisões no escuro envolvendo pequenas rabetas chegam a representar a esmagadora maioria das ocorrências nos rios."</p>
-                <div class="author">Noticiário Local</div>
-            </div>
+            <!-- (Comentários do Carrossel Omitidos visualmente para brevidade, mas estão mantidos no código) -->
+            <div class="comment-card"><div class="source">Portal G1 - Amazonas</div><p>"Um barco de pequeno porte naufragou após o condutor perder o controle em meio ao temporal e ao rio agitado na orla da cidade. Ele estava sozinho e sem comunicação."</p><div class="author">Março de 2026</div></div>
+            <div class="comment-card"><div class="source">Tribunal Marítimo</div><p>"Colisões noturnas entre pequenas embarcações sem iluminação ou rastreio representam a causa principal de acidentes graves na navegação fluvial interior."</p><div class="author">Boletim de Acidentes</div></div>
+            <div class="comment-card"><div class="source">Relato de Morador</div><p>"Ficamos à deriva por 5 horas com crianças no barco após o motor falhar perto da ilha. Não havia sinal de celular em lugar nenhum para pedir resgate para a cidade."</p><div class="author">Comunidade Ribeirinha (Pará)</div></div>
+            <div class="comment-card"><div class="source">Corpo de Bombeiros</div><p>"Ao longo do ano, incidentes causados por colisões no escuro envolvendo pequenas rabetas chegam a representar a esmagadora maioria das ocorrências nos rios."</p><div class="author">Noticiário Local</div></div>
+            <!-- Duplicados para o loop -->
             <div class="comment-card"><div class="source">Portal G1 - Amazonas</div><p>"Um barco de pequeno porte naufragou após o condutor perder o controle em meio ao temporal e ao rio agitado na orla da cidade. Ele estava sozinho e sem comunicação."</p><div class="author">Março de 2026</div></div>
             <div class="comment-card"><div class="source">Tribunal Marítimo</div><p>"Colisões noturnas entre pequenas embarcações sem iluminação ou rastreio representam a causa principal de acidentes graves na navegação fluvial interior."</p><div class="author">Boletim de Acidentes</div></div>
             <div class="comment-card"><div class="source">Relato de Morador</div><p>"Ficamos à deriva por 5 horas com crianças no barco após o motor falhar perto da ilha. Não havia sinal de celular em lugar nenhum para pedir resgate para a cidade."</p><div class="author">Comunidade Ribeirinha (Pará)</div></div>
@@ -331,23 +226,10 @@
                 <h2 class="section-title">O Desafio dos Nossos Rios</h2>
                 <p class="section-desc">Entenda por que estar conectado de forma segura é uma necessidade urgente para quem vive da água.</p>
             </div>
-            
             <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-icon">🚤</div>
-                    <h3>O Motor da Amazônia</h3>
-                    <p>Mais de 50 mil pequenas embarcações operam diariamente, sendo o principal transporte de pessoas, mercadorias e estudantes nas comunidades.</p>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">📵</div>
-                    <h3>Zonas Isoladas</h3>
-                    <p>Mesmo com viagens constantes, a navegação ocorre no escuro. Mais de 90% dos trajetos não possuem nenhum sinal de celular para contato com a terra firme.</p>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">⚠️</div>
-                    <h3>Acidentes Invisíveis</h3>
-                    <p>A falta de visão à noite ou durante temporais, somada à impossibilidade de pedir ajuda, transforma pequenos problemas mecânicos em grandes emergências.</p>
-                </div>
+                <div class="stat-item"><div class="stat-icon">🚤</div><h3>O Motor da Amazônia</h3><p>Mais de 50 mil pequenas embarcações operam diariamente, sendo o principal transporte de pessoas, mercadorias e estudantes nas comunidades.</p></div>
+                <div class="stat-item"><div class="stat-icon">📵</div><h3>Zonas Isoladas</h3><p>Mesmo com viagens constantes, a navegação ocorre no escuro. Mais de 90% dos trajetos não possuem nenhum sinal de celular para contato com a terra firme.</p></div>
+                <div class="stat-item"><div class="stat-icon">⚠️</div><h3>Acidentes Invisíveis</h3><p>A falta de visão à noite ou durante temporais, somada à impossibilidade de pedir ajuda, transforma pequenos problemas mecânicos em grandes emergências.</p></div>
             </div>
         </div>
 
@@ -356,23 +238,10 @@
                 <h2 class="section-title">Segurança para a sua viagem</h2>
                 <p class="section-desc">Criamos um equipamento feito sob medida para enfrentar a chuva, o sol e as distâncias dos rios amazônicos.</p>
             </div>
-            
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="f-icon">📡</div>
-                    <h3>Conexão sem Internet</h3>
-                    <p>Os barcos conversam entre si. O Transponder indica que um barco entrou em contato usando alertas, sem depender de operadoras ou Wi-Fi.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="f-icon">⚓</div>
-                    <h3>Visão Noturna e Alertas</h3>
-                    <p>Uma tela, um alerta sonoro e um indicador de alto brilho avisam quando há embarcações no seu caminho, mostrando a distância para evitar sustos.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="f-icon">⚙️</div>
-                    <h3>Instalação Simples</h3>
-                    <p>Desenvolvido para se adaptar ao seu barco. A instalação é rápida, não exige cortes ou adaptações complicadas, e a proteção começa imediatamente.</p>
-                </div>
+                <div class="feature-card"><div class="f-icon">📡</div><h3>Conexão sem Internet</h3><p>Os barcos conversam entre si. O Transponder indica que um barco entrou em contato usando alertas, sem depender de operadoras ou Wi-Fi.</p></div>
+                <div class="feature-card"><div class="f-icon">⚓</div><h3>Visão Noturna e Alertas</h3><p>Uma tela, um alerta sonoro e um indicador de alto brilho avisam quando há embarcações no seu caminho, mostrando a distância para evitar sustos.</p></div>
+                <div class="feature-card"><div class="f-icon">⚙️</div><h3>Instalação Simples</h3><p>Desenvolvido para se adaptar ao seu barco. A instalação é rápida, não exige cortes ou adaptações complicadas, e a proteção começa imediatamente.</p></div>
             </div>
         </div>
 
@@ -381,26 +250,10 @@
                 <h2 class="section-title">Conheça nossas histórias</h2>
                 <p class="section-desc">Veja na prática como o Transponder ajuda a proteger as famílias ribeirinhas e traz mais segurança para o dia a dia nos rios.</p>
             </div>
-
             <div class="video-grid">
-                <a href="https://www.youtube.com/watch?v=ZZu71FzkpZ4&t=214s" target="_blank" class="video-card" style="background-image: url('https://img.youtube.com/vi/ZZu71FzkpZ4/hqdefault.jpg');">
-                    <div class="video-overlay">
-                        <div class="play-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                        <span class="video-title">Como Funciona</span>
-                    </div>
-                </a>
-                <a href="https://www.youtube.com/watch?v=_cNBY2UAaaM" target="_blank" class="video-card" style="background-image: url('https://img.youtube.com/vi/_cNBY2UAaaM/hqdefault.jpg');">
-                    <div class="video-overlay">
-                        <div class="play-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                        <span class="video-title">História e Impacto</span>
-                    </div>
-                </a>
-                <a href="https://www.youtube.com/watch?v=qYYk8R3LhfA" target="_blank" class="video-card" style="background-image: url('https://img.youtube.com/vi/qYYk8R3LhfA/hqdefault.jpg');">
-                    <div class="video-overlay">
-                        <div class="play-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                        <span class="video-title">Transponder na Comunidade</span>
-                    </div>
-                </a>
+                <a href="https://www.youtube.com/watch?v=ZZu71FzkpZ4&t=214s" target="_blank" class="video-card" style="background-image: url('https://img.youtube.com/vi/ZZu71FzkpZ4/hqdefault.jpg');"><div class="video-overlay"><div class="play-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="video-title">Como Funciona</span></div></a>
+                <a href="https://www.youtube.com/watch?v=_cNBY2UAaaM" target="_blank" class="video-card" style="background-image: url('https://img.youtube.com/vi/_cNBY2UAaaM/hqdefault.jpg');"><div class="video-overlay"><div class="play-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="video-title">História e Impacto</span></div></a>
+                <a href="https://www.youtube.com/watch?v=qYYk8R3LhfA" target="_blank" class="video-card" style="background-image: url('https://img.youtube.com/vi/qYYk8R3LhfA/hqdefault.jpg');"><div class="video-overlay"><div class="play-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="video-title">Transponder na Comunidade</span></div></a>
             </div>
         </div>
 
@@ -412,21 +265,9 @@
             
             <div class="form-wrapper">
                 <form id="interesseForm">
-                    <div class="form-group">
-                        <label for="nome">Nome Completo</label>
-                        <input type="text" id="nome" required placeholder="Como podemos te chamar?">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" required placeholder="seu@email.com">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="celular">Celular / WhatsApp</label>
-                        <input type="text" id="celular" required placeholder="(00) 00000-0000">
-                    </div>
-                    
+                    <div class="form-group"><label for="nome">Nome Completo</label><input type="text" id="nome" required placeholder="Como podemos te chamar?"></div>
+                    <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" required placeholder="seu@email.com"></div>
+                    <div class="form-group"><label for="celular">Celular / WhatsApp</label><input type="text" id="celular" required placeholder="(00) 00000-0000"></div>
                     <button type="submit" id="submitBtn" class="btn-submit">Enviar Solicitação</button>
                     <div id="formStatus" class="status-msg"></div>
                 </form>
@@ -435,22 +276,47 @@
         
     </div>
 
+    <!-- MODAL DO SAC OCULTO -->
+    <div id="sacModal" class="modal-overlay">
+        <div class="modal-card">
+            <button id="closeSac" class="close-btn">&times;</button>
+            <h2 class="section-title" style="font-size: 1.6rem; margin-bottom: 5px; text-align: left;">Central de Ajuda</h2>
+            <p class="section-desc" style="font-size: 0.95rem; margin-bottom: 25px; text-align: left;">Relate o seu problema ou dúvida. Nossa equipe técnica responderá o mais rápido possível.</p>
+            
+            <form id="sacForm">
+                <div class="form-group">
+                    <label for="sacContato">Seu Celular ou ID do Cliente</label>
+                    <input type="text" id="sacContato" required placeholder="Ex: (91) 90000-0000 ou CLI-123">
+                </div>
+                <div class="form-group">
+                    <label for="sacCategoria">Categoria do Problema</label>
+                    <select id="sacCategoria" required>
+                        <option value="">Selecione uma opção...</option>
+                        <option value="Dúvida">Dúvida de Uso</option>
+                        <option value="Equipamento Falhando">Equipamento Falhando</option>
+                        <option value="Instalação">Ajuda na Instalação</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sacMensagem">Mensagem</label>
+                    <textarea id="sacMensagem" rows="4" required placeholder="Descreva o que está acontecendo..."></textarea>
+                </div>
+                <button type="submit" id="sacSubmitBtn" class="btn-submit">Abrir Chamado</button>
+                <div id="sacStatus" class="status-msg"></div>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <div class="ocean">
-            <div class="wave"></div>
-            <div class="wave"></div>
-            
-            
+            <div class="wave"></div><div class="wave"></div>
             <div class="rabeta-wrapper">
                 <div class="rabeta-bobbing">
                     <svg viewBox="0 0 200 60" width="140" height="42">
-                        <rect x="5" y="15" width="18" height="25" fill="#334155" rx="3"/>
-                        <rect x="8" y="10" width="12" height="5" fill="#e2e8f0" rx="1"/>
-                        <path d="M10,40 L18,40 L18,55 L10,55 Z" fill="#1e293b"/>
-                        <path d="M25,20 L160,20 L195,8 L170,40 L35,40 Z" fill="#3b82f6"/> 
-                        <path d="M25,20 L160,20 L170,40 L35,40 Z" fill="#2563eb"/> 
-                        <rect x="50" y="20" width="15" height="4" fill="#78350f"/>
-                        <rect x="100" y="20" width="15" height="4" fill="#78350f"/>
+                        <rect x="5" y="15" width="18" height="25" fill="#334155" rx="3"/><rect x="8" y="10" width="12" height="5" fill="#e2e8f0" rx="1"/><path d="M10,40 L18,40 L18,55 L10,55 Z" fill="#1e293b"/>
+                        <path d="M25,20 L160,20 L195,8 L170,40 L35,40 Z" fill="#3b82f6"/> <path d="M25,20 L160,20 L170,40 L35,40 Z" fill="#2563eb"/> 
+                        <rect x="50" y="20" width="15" height="4" fill="#78350f"/><rect x="100" y="20" width="15" height="4" fill="#78350f"/>
                         <circle cx="193" cy="8" r="3" fill="#ef4444" class="led-blink" />
                     </svg>
                 </div>
@@ -460,69 +326,88 @@
         <div style="position: relative; z-index: 10;">
             <p>&copy; 2026 Projeto Transponder. Belém, Pará - Brasil.</p>
             <p style="margin-top: 5px;">&copy; RADAR E TECNOLOGIA LTDA - 62.843.510/0001-88</p>
+            <!-- BOTÃO DO SAC AQUI -->
+            <a id="btnAbrirSac" class="link-sac">Já tem o Transponder? Fale com o Suporte</a>
         </div>
     </footer>
 
     <script>
+        // Lógica do Menu Mobile
         const menuToggle = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
+        menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); menuToggle.classList.toggle('open'); });
+        document.querySelectorAll('#nav-links a').forEach(link => { link.addEventListener('click', () => { navLinks.classList.remove('active'); menuToggle.classList.remove('open'); }); });
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('open');
-        });
-
-        document.querySelectorAll('#nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('open');
-            });
-        });
-
-        document.getElementById('celular').addEventListener('input', function(e) {
+        // Máscaras de Celular
+        function mascaraCelular(e) {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-        });
+        }
+        document.getElementById('celular').addEventListener('input', mascaraCelular);
+        
+        // URL DA SUA PLANILHA (COLE AQUI!)
+        const URL_APPS_SCRIPT = 'https://script.google.com/macros/s/AKfycbwD66jeAaHOFC2VMadSsJbr6HBwq4wfbk8RhWXzWPXNFh6OkU0fbl6GIM-MLPblF5Y7/exec';
 
+        // Envio do Cadastro de Lead
         document.getElementById('interesseForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const btn = document.getElementById('submitBtn');
             const status = document.getElementById('formStatus');
-            
-            btn.innerText = "Enviando...";
-            btn.disabled = true;
-            status.innerText = "";
+            btn.innerText = "Enviando..."; btn.disabled = true; status.innerText = "";
 
             const dados = {
+                action: 'cadastro',
                 nome: document.getElementById('nome').value,
                 email: document.getElementById('email').value,
                 celular: document.getElementById('celular').value
             };
 
             const formBody = Object.keys(dados).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(dados[key])).join('&');
-            const URL_APPS_SCRIPT = 'COLE_AQUI_A_URL_DO_SEU_WEB_APP';
 
-            fetch(URL_APPS_SCRIPT, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-                body: formBody
-            })
-            .then(response => response.json())
-            .then(data => {
+            fetch(URL_APPS_SCRIPT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }, body: formBody })
+            .then(() => {
                 status.innerText = "Solicitação enviada com sucesso! Entraremos em contato.";
-                status.style.color = "var(--success)";
-                document.getElementById('interesseForm').reset();
+                status.style.color = "var(--success)"; document.getElementById('interesseForm').reset();
             })
-            .catch(error => {
-                status.innerText = "Obrigado! Sua solicitação foi recebida."; 
+            .finally(() => { btn.innerText = "Enviar Solicitação"; btn.disabled = false; });
+        });
+
+        // ==========================================
+        // CONTROLES DO MODAL DO SAC
+        // ==========================================
+        const modal = document.getElementById('sacModal');
+        document.getElementById('btnAbrirSac').addEventListener('click', () => modal.style.display = 'flex');
+        document.getElementById('closeSac').addEventListener('click', () => modal.style.display = 'none');
+        
+        // Fecha o modal ao clicar fora da caixa branca
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+
+        // Envio do Chamado de Suporte (SAC)
+        document.getElementById('sacForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('sacSubmitBtn');
+            const status = document.getElementById('sacStatus');
+            btn.innerText = "Abrindo Chamado..."; btn.disabled = true; status.innerText = "";
+
+            const dados = {
+                action: 'sac',
+                contato: document.getElementById('sacContato').value,
+                categoria: document.getElementById('sacCategoria').value,
+                mensagem: document.getElementById('sacMensagem').value
+            };
+
+            const formBody = Object.keys(dados).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(dados[key])).join('&');
+
+            fetch(URL_APPS_SCRIPT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }, body: formBody })
+            .then(() => {
+                status.innerText = "Chamado aberto com sucesso! Retornaremos em breve.";
                 status.style.color = "var(--success)";
-                document.getElementById('interesseForm').reset();
+                document.getElementById('sacForm').reset();
+                setTimeout(() => { modal.style.display = 'none'; status.innerText = ""; }, 3000); // Fecha o modal após 3 seg
             })
-            .finally(() => {
-                btn.innerText = "Enviar Solicitação";
-                btn.disabled = false;
-            });
+            .finally(() => { btn.innerText = "Abrir Chamado"; btn.disabled = false; });
         });
     </script>
 </body>
